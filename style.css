@@ -1,0 +1,15 @@
+html {
+    background-color: #3d3d43;
+    color: ghostwhite;
+    font-family: Verdana, sans-serif;
+    font-size: 30px;
+}
+
+
+#die {
+    width: 300px;
+    height: 100px;
+    color: ghostwhite;
+    background-color: dimgrey;
+    border: none;
+}
