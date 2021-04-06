@@ -6,23 +6,30 @@
 </head>
 
 <body>
-    <h1>Pandemieplan nach Laschet</h1>
-    <button onclick="callLaschet()">Wuerfeln</button> <br>
-    <input placeholder="Ergebnis" id="result" type="text">
+<h1>Pandemieplan nach Laschet</h1>
+<button onclick="callLaschet()">Wuerfeln</button>
+<br>
+<input placeholder="Ergebnis" id="result" type="text">
 </body>
 
 </html>
 <script>
     function callLaschet() {
-        var res = [];
+        let res = "";
+
+        //v: value, m: male
+        const setMainNoun = [{v: "Lockdown", m: true}, {v: "Stopp", m: true},
+            {v: "Massnahme", m: false}, {v: "Kampagne", m: false}, {v: "Sprint", m: true}, {v: "Matrix", m: false}];
+
+
+        const mainNoun = setMainNoun[roll()];
 
         const setOne = ["ein-", "zwei-", "drei-", "vier-", "fuenf-", "sechs-"];
-        const setTwo = ["taegige/r-", "woechige/r-", "monatige/r-", "fache/r-", "malige/r-", "hebige/r-"];
-        const setThree = ["harte/r ", "soften ", "optionale/r ", "intransparente/r ", "alternativlose/r ",
-            "unumkehrbare/r "
+        const setTwo = ["taegige", "woechige", "monatige", "fache", "malige", "hebige"];
+        const setThree = ["harte", "softe", "optionale", "intransparente", "alternativlose",
+            "unumkehrbare"
         ];
         const setFour = ["Wellenbrecher-", "Bruecken-", "Treppen-", "Wende-", "Impf-", "Ehren-"];
-        const setFive = ["Lockdown ", "Stopp ", "Massnahme ", "Kampagne ", "Sprint ", "Matrix "];
         const setSix = ["zum Sommer ", "auf Weiteres ", "zur Bundestagswahl ", "2030 ", "nach den Abiturpruefungen ",
             "in die Puppen "
         ];
@@ -34,29 +41,20 @@
             "dritten Welle.", "Bundeskanzlerin."
         ];
 
-        const arraySet = [setOne, setTwo, setThree, setFour, setFive, setSix, setSeven, setEight, setNine];
+        const male = mainNoun.m;
 
-        res.push('Was wir jetzt brauchen, ist ein/e ')
+        res += "Was wir jetzt brauchen, ist ein" + (male ? " " : "e ") +
+            setOne[roll()] + setTwo[roll()] + (male ? "r " : " ") +
+            setThree[roll()] + (male ? "r " : " ") +
+            setFour[roll()] + mainNoun.v +
+            " bis " + setSix[roll()] + "zur " + setSeven[roll()] + setEight[roll()] + "der " + setNine[roll()];
 
-        for (let rounds = 0; rounds < arraySet.length; rounds++) {
-            const thisArray = arraySet[rounds];
 
-            const run = Math.floor((Math.random() * 6));
 
-            res.push(thisArray[run]);
-
-            if (rounds == 4)
-                res.push('bis ');
-
-            if (rounds == 5)
-                res.push('zur ');
-
-            if (rounds == 7)
-                res.push('der ');
-        }
-
-        document.getElementById('result').setAttribute('value', res.join(''));
+        document.getElementById('result').setAttribute('value', res);
     }
+
+    const roll = () => Math.floor((Math.random() * 6));
 </script>
 
 <style>
